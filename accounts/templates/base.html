@@ -1,6 +1,6 @@
 
 
-
+{% load pimlurMOOC_extras %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -85,12 +85,14 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Dashboard</li>
-              <li class="active"><a href="#">All Pimlurs</a></li>
-              <li><a href="#">Brazilian Pimlurs</a></li>
-              <li><a href="#">Deutsch Pimlurs</a></li>
-              <li><a href="#">Spanish Pimlurs</a></li>
+              <li class="{% if category == 'all' %} active {% endif %}"><a href="/dashboard/all">All Pimlurs</a></li>
+              {% for pimlurMOOC in pimlurMOOC|getPimlurCategories %}
+                <li class="{% if category == pimlurMOOC.name %} active {% endif %}"><a href="/dashboard/{{ pimlurMOOC.name }}">{{ pimlurMOOC.name }}</a></li>
+              {% endfor %}
               <li class="nav-header">My Pimlurs</li>
-              <li><a href="#">Deutsch Pimlurs</a></li>
+              {% for pimlurMOOC in pimlurMOOC|getMyPimlurs:user.id %}
+                <li><a href="#">{{ pimlurMOOC.pimlur.name }}</a></li>
+              {% endfor %}
             </ul>
             <ul class="nav nav-list"> 
                 <li class="nav-header">Admin Menu</li>        

@@ -6,5 +6,11 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def dashboard(request):
     # conversations = get_conversations(request)
+    
+    return render(request, "dashboard.html", { 'user': request.user, 'category': 'All' })
 
-    return render(request, "dashboard.html", {})
+@login_required
+def dashboard_category(request, category):
+    # conversations = get_conversations(request)
+    
+    return render(request, "dashboard.html", { 'user': request.user, 'category': category })
