@@ -1,0 +1,164 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bootstrap, from Twitter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="/static/assets/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        width: 100%;
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="/static/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    
+    <script type="text/javascript" src="/assets/quizlib/scripts/quizlib.1.0.1.min.js"></script>
+    <!-- Dev: <script type="text/javascript" src="../../src/quizlib.js"></script>-->
+    <script type="text/javascript" src="/assets/quizlib/scripts/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/assets/quizlib/styles/quizlib.min.css" media="screen">
+    <!-- Dev: <link rel="stylesheet" type="text/css" href="../../src/quizlib.css" media="screen">-->
+    <link rel="stylesheet" type="text/css" href="/static/assets/quizlib/styles/stylesheet.css" media="screen">
+
+    
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="/static/assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="/static/assets/ico/favicon.png">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">Pimlur</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+            {% if user.is_authenticated %}
+            <p class="navbar-text pull-right">
+                Logged in as <a href="#" class="navbar-link">{{ user.username }}</a>
+              </p>
+            {% else %}
+            <form class="navbar-form pull-right" role="form" method="POST" action="{% url 'user_login' %}">{% csrf_token %}
+                <input name="username" class="span2" type="text" placeholder="Username">
+                <input name="password" class="span2" type="password" placeholder="Password">
+                <button type="submit" class="btn">Sign in</button>
+                </form>
+            {% endif %}
+          </div><!--/.nav-collapse -->
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        {% block body_sidebar %}
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Dashboard</li>
+              <li class="active"><a href="#">All Pimlurs</a></li>
+              <li><a href="#">Brazilian Pimlurs</a></li>
+              <li><a href="#">Deutsch Pimlurs</a></li>
+              <li><a href="#">Spanish Pimlurs</a></li>
+              <li class="nav-header">My Pimlurs</li>
+              <li><a href="#">Deutsch Pimlurs</a></li>
+            </ul>
+            <ul class="nav nav-list"> 
+                <li class="nav-header">Admin Menu</li>        
+                <li><a href="index"><i class="icon-home"></i> Dashboard</a></li>
+                <li><a href="#"><i class="icon-envelope"></i> Messages <span class="badge badge-info">4</span></a></li>
+                <li><a href="#"><i class="icon-comment"></i> Comments <span class="badge badge-info">10</span></a></li>
+                <li class=""><a href="#"><i class="icon-user"></i> Members</a></li>
+                <li class="divider"></li>
+                <li><a href="#"><i class="icon-comment"></i> Settings</a></li>
+                <li><a href="#"><i class="icon-share"></i> Logout</a></li>
+              </ul>
+      
+          </div><!--/.well -->
+        </div>
+        {% endblock %}
+        {% block body %}
+        {% endblock %}
+      </div>
+    </div> <!-- /container -->
+    <footer>
+      <p>&copy; Company 2013</p>
+    </footer>
+    
+    <script>
+        var quiz = new Quiz('quiz-div', ['a', ['b', 'c', 'd']]);
+        function myAnswerCheckMethod() {
+            // checkAnswers returns true if all questions have been answered and updates the result object
+            if (quiz.checkAnswers()) {
+                console.log('Correct answers: ' + quiz.result.score + '/' + quiz.result.totalQuestions);
+                console.log('Percent correct: ' + quiz.result.scorePercentFormatted + '%');
+            }
+                
+            // Alternatively, we can ignore unanswered questions by passing false
+            quiz.checkAnswers(false);
+            console.log('Correct answers: ' + quiz.result.score + '/' + quiz.result.totalQuestions);
+            console.log('Percent correct: ' + quiz.result.scorePercentFormatted + '%');
+
+            // We can also use the highResults method to highlight correct and incorrect answers.
+            // We pass a callback which takes the quiz object, the current question, the question number and whether it was answered correctly.
+            quiz.highlightResults(myHandleAnswerMethod);
+        }
+
+        // Callback for quiz.highlightResults called for each question. Parameters are: The quiz object the question belongs to,
+        // the question element, the question number and a boolean indicating if the question was answered correctly.
+        function myHandleAnswerMethod(quiz, question, no, correct) {
+            if (!correct) {
+                // Highlight the correct answers.
+                // See the example code on GitHub for an example implementation.
+            }
+        }
+
+    </script>
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/assets/js/jquery.js"></script>
+    <script src="/assets/js/bootstrap-transition.js"></script>
+    <script src="/assets/js/bootstrap-alert.js"></script>
+    <script src="/assets/js/bootstrap-modal.js"></script>
+    <script src="/assets/js/bootstrap-dropdown.js"></script>
+    <script src="/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="/assets/js/bootstrap-tab.js"></script>
+    <script src="/assets/js/bootstrap-tooltip.js"></script>
+    <script src="/assets/js/bootstrap-popover.js"></script>
+    <script src="/assets/js/bootstrap-button.js"></script>
+    <script src="/assets/js/bootstrap-collapse.js"></script>
+    <script src="/assets/js/bootstrap-carousel.js"></script>
+    <script src="/assets/js/bootstrap-typeahead.js"></script>
+
+  </body>
+</html>

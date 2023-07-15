@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div style="position:center;margin-top: 100px;text-align: center;">
+                            {% if current_user_profile.photo %}
+                            <img class="img-thumbnail" alt="user image" src="{{ current_user_profile.photo.url }}"
+                                 width="240">
+                        {% else %}
+                            <img class="img-thumbnail" alt="user image"
+                                 src="{% static 'accounts/img/nsp_profile_default.jpg' %}" width="240px">
+                        {% endif %}
+
+    {% for error,message in form.errors.items %}
+        {{ error }}
+        {{ message }}
+    {% endfor %}
+    <form style="" method="POST" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <center>
+            {{ form.as_p}}
+        </center>
+        <button class="btn btn-primary" type="submit">Change</button>
+    </form>
+</div>
+{% endblock body %}
