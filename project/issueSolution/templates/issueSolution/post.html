@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block customcss %}    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+{% endblock customcss %}  
+
+{% block body %}  
+<div class="twt-wrapper" style="margin: 50px">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+            </div>
+            <h2><a href="{% url 'view_project_detail' project.id %}">{{ project.project_name }}</a> - {{ type }}
+                #{{ post.id }} </h2>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-title p-2 p-t">
+                            <a href="">
+                                {% if userProfile.photo %}
+                                    <img class="rounded-circle img-thumbnail" src="{{ userProfile.photo.url }}"
+                                         width="64" height="64" alt="Avatar">
+                                    <span class="badge badge-dark"><b>{{ post.user.username }}</b></a> -
+                                    <em>{{ post.date }}</em></span>
+                                    </div>
+                                {% else %}
+                                    <a href="{% url 'view_friend' post.user.username %}"><img
+                                            class="rounded-circle img-thumbnail"
+                                            src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
+                                            width="64" height="64" alt="Avatar"><span
+                                            class="badge badge-dark"><b>{{ post.user.username }}</b></a>
+                                    - <em>{{ post.date }}</em></span>                                           </div>
+                                {% endif %}
+
+                    <div style="margin: 10px;" class="card-block">
+                        {% if type == "issue" %}
+                            {% if post.status == "1" %}
+                                <td><span class="badge badge-pill badge-success"> Open</span></td>
+                            {% endif %}
+                            {% if post.status == "0" %}
+                                <td><span class="badge badge-pill badge-success"> Closed</span></td>
+                            {% endif %}
+                        {% elif type == "solution" %}
+                            {% if post.status == "0" %}
+                                <td><span class="badge badge-pill badge-success"> Open</span></td>
+                            {% endif %}
+                            {% if post.status == "1" %}
+                                <td><span class="badge badge-pill badge-success"> Accepted</span></td>
+                            {% endif %}
+                            {% if post.status == "2" %}
+                                <td><span class="badge badge-pill badge-danger"> Not accepted</span></td>
+                            {% endif %}
+
+                        {% endif %}
+                        <h3>{{ post.title }}</h3>
+                        <p class="card-text">{{ post.description|linebreaks }}</p>
+                        {% if type == "solution" %}
+                            <h3>Issue: <a
+                                    href="{% url 'viewIssueSolution' project.id 'issue' post.issue.id %}">{{ post.issue|linebreaks }}
+                            </h3></a>
+                        {% endif %}
+                        {% if type == "solution" %}
+                            <a href="{% url 'voteSolution' 'upvote' post.id %}"><i class="fas fa-arrow-up">Upvote ({{upvotes}})</i></a>
+                            <a href="{% url 'voteSolution' 'downvote' post.id %}"><i class="fas fa-arrow-down">Downvote({{downvotes}})</i></a>
+                        {% endif %}
+                        <a class="btn btn-sm btn-primary-outline float-right"><i
+                                class="fa fa-comments"></i> {{ comments|length }}</a>
+                        {% if project.initiated_by == request.user %}
+                            {% if type == "issue" %}
+                                {% if post.status == "0" %}
+                                    <a href="{% url 'changeStatusIssueSolution' project.id type post.id 'open' %}"
+                                       class="btn btn-sm btn-success-outline float-right btn-success">Open</a>
+                                {% endif %}
+                                {% if post.status == "1" %}
+                                    <a href="{% url 'changeStatusIssueSolution' project.id type post.id 'closed' %}"
+                                       class="btn btn-sm btn-danger-outline float-right btn-danger">Close</a>
+                                {% endif %}
+                            {% endif %}
+                            {% if type == "solution" %}
+                                {% if post.status == "0" %}
+                                    <a href="{% url 'changeStatusIssueSolution' project.id type post.id 'accepted' %}"
+                                       class="btn btn-sm btn-success-outline float-right btn-success">Accept</a>
+                                    <a href="{% url 'changeStatusIssueSolution' project.id type post.id 'notaccepted' %}"
+                                       class="btn btn-sm btn-warning-outline float-right btn-warning">Don't accept</a>
+                                {% endif %}
+                                {% if post.status == "1" %}
+                                    <a href="{% url 'changeStatusIssueSolution' project.id type post.id 'open' %}"
+                                       class="btn btn-sm btn-success-outline float-right btn-success">Open</a>
+                                    <a href="{% url 'changeStatusIssueSolution' project.id type post.id 'notaccepted' %}"
+                                       class="btn btn-sm btn-warning-outline float-right btn-warning">Don't accept</a>
+                                {% endif %}
+                                {% if post.status == "2" %}
+                                    <a href="{% url 'changeStatusIssueSolution' project.id type post.id 'open' %}"
+                                       class="btn btn-sm btn-success-outline float-right btn-success">Open</a>
+                                    <a href="{% url 'changeStatusIssueSolution' project.id type post.id 'accepted' %}"
+                                       class="btn btn-sm btn-warning-outline float-right btn-warning">Accept</a>
+                                {% endif %}
+
+                            {% endif %}
+                        {% endif %}
+                        {% if request.user == post.user %}
+                            <a href="{% url 'editIssueSolution' project.id type post.id %}"
+                               class="btn btn-sm btn-warning-outline float-right btn-warning">Edit</a>
+                            <a href="{% url 'deleteIssueSolution' type post.id %}"
+                               class="btn btn-sm btn-primary-outline float-right btn-danger">Delete</a>
+                        {% endif %}
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="comments col-md-9" id="comments">
+                            <h3 class="mb-2">Comments</h3>
+                            <!-- comment -->
+                            {% for key,profile_comment in profile_comment.items %}
+                                <div class="comment mb-2 row">
+                                    <div class="comment-avatar col-md-1 col-sm-2 text-center pr-1">
+                                        {% if profile_comment.0.photo %}
+                                            <a href=""><img class="mx-auto rounded-circle img-fluid"
+                                                            src="{{ profile_comment.0.photo.url }}" alt="avatar"></a>
+                                        {% else %}
+                                            <a href=""><img class="mx-auto rounded-circle img-fluid"
+                                                            src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
+                                                            alt="avatar"></a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="comment-content col-md-11 col-sm-10">
+                                        <h6 class="small comment-meta"><a
+                                                href="{% url 'view_friend' profile_comment.0.user.username %}">{{ profile_comment.0.user.username }}</a> {{ profile_comment.1.date }}
+                                        </h6>
+                                        <div class="comment-body" id="comment-{{ profile_comment.1.id }}">
+                                            <p>
+                                                {{ profile_comment.1.comment|linebreaks }}
+                                                <br>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- /reply is indented -->
+                                    {% if request.user == profile_comment.0.user %}
+                                        <div class="edit-comment" style="margin-left: 5em;">
+                                            <button class="btn btn-sm btn-warning-outline float-right btn-warning edit-comment-button">Edit</button>
+                                            <form action="{% url 'editCommentIssueSolution' project.id type profile_comment.1.pk %}" method="post" class="form form-inline" style="display: none;">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <textarea name="comment" id="" class="form-control" rows="5" cols="50">{{ profile_comment.1.comment }}</textarea>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input type="submit" class="btn" value="submit edit">
+                                                </div>
+                                                <input id="path" type="hidden" name="path" value="{{ request.path }}">
+                                            </form>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                            <!-- /comment -->
+                            <script type="text/javascript">
+                                function editComment(e) {
+                                    // displays the edit form
+                                    const form = e.target.nextElementSibling;
+                                    e.target.innerText = e.target.innerText === "EDIT"? "Close": "EDIT";
+                                    form.style.display = form.style.display === ""? "none": "";
+                                };
+
+                                const editCommentButtons = [...document.getElementsByClassName("edit-comment-button")];
+                                editCommentButtons.forEach(button => {
+                                    button.addEventListener('click', editComment)
+                                });
+                            </script>
+
+                        </div>
+                    </div>
+                </div>
+                <form method="POST" action="{% url 'commentIssueSolution' project.id type post.id %}"> {% csrf_token %}
+                    <div class="card-footer text-muted">
+                        <div class="form-group">
+                            <label for="comment">Comment</label>
+                            <textarea class="form-control" id="comment" name="comment" rows="5"></textarea>
+                        </div>
+                        <button class="btn btn-primary-outline" type="submit"><i class="fa fa-edit"></i></button>
+                    </div>
+                    <input id="path" type="hidden" name="path" value="{{ request.path }}">
+
+                </form>
+                </span>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+{% endblock body %}
