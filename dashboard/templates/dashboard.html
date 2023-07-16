@@ -10,7 +10,11 @@
     <div class="span4">
       <h2>{{pimlurMOOC.name}}</h2>
       <p>{{ pimlurMOOC.description }}</p>
-      <p><a class="btn" href="#">View details »</a></p>
+      <p>
+        <form method="post" action="{% url 'join_pimlur' %}">{% csrf_token %}
+          <input type="hidden" name="pimlurId" value="{{pimlurMOOC.id}}"/>
+          <button type="submit" class="btn" href="#">Join Pimlur »</button></p>
+        </form>
     </div><!--/span-->
     {% endfor %}
     </div><!--/row-->

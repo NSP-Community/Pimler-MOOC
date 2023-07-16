@@ -28,6 +28,7 @@ class Pimlur(models.Model):
     name = models.CharField(max_length=50, default="", blank=False)
     description = models.TextField()
     category = models.ForeignKey(PimlurCategory, on_delete=models.CASCADE)
+    pimlurCategory = models.ForeignKey(PimlurCategory,related_name="pimlurCategory",  on_delete=models.CASCADE)
 
     createdBy = models.ForeignKey(User, on_delete=models.CASCADE)
 

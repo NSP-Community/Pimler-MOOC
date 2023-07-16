@@ -20,5 +20,5 @@ def getMyPimlurs(context,user_id):
 
 @register.filter(name='getPimlurs')
 def getPimlurs(context,category):
-    if (category == "all"): return Pimlur.objects.all().order_by("-id");
+    if (category == "all" or category == "All"): return Pimlur.objects.all().order_by("-id");
     else: return Pimlur.objects.filter(category__name=category).order_by("-id")
