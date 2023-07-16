@@ -81,22 +81,52 @@
     <div class="container-fluid">
       <div class="row-fluid">
         {% block body_sidebar %}
-        <div class="span3">
-          <div class="well sidebar-nav">
+        {% if 'pimlurs' in request.path %}
+            <div class="span3">
+              <div class="well sidebar-nav">
+              <ul class="nav nav-list">
+                <li class="nav-header">Inside Pimlur - {{ pimlur.name }}</li>
+                {% for item in info %}
+                <li class="{% if category == item.0.name %} active {% endif %}"><a href="#/dashboard/pimlurs/{{ pimlur.id }}/{{item.0.id}}">{{ item.0.name }}</a></li>
+                  {% for i in item.1 %}
+                  <li class="{% if category == item.0.name %} active {% endif %}"><a href="/dashboard/pimlurs/{{ pimlur.id }}/{{item.0.id}}/{{i.id}}">{{ i.name }}</a></li>
+                  {% endfor %}
+                {% endfor %}
+                <li class="nav-header">My Pimlurs</li>
+                {% for pimlurMOOC in pimlurMOOC|getMyPimlurs:user.id %}
+                <li><a href="#">{{ pimlurMOOC.pimlur.name }}</a></li>
+                {% endfor %}
+              </ul>
+              <ul class="nav nav-list"> 
+                <li class="nav-header">Admin Menu</li>        
+                <li><a href="index"><i class="icon-home"></i> Dashboard</a></li>
+                  <li><a href="#"><i class="icon-envelope"></i> Messages <span class="badge badge-info">4</span></a></li>
+                  <li><a href="#"><i class="icon-comment"></i> Comments <span class="badge badge-info">10</span></a></li>
+                  <li class=""><a href="#"><i class="icon-user"></i> Members</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#"><i class="icon-comment"></i> Settings</a></li>
+                  <li><a href="#"><i class="icon-share"></i> Logout</a></li>
+                </ul>
+        
+            </div><!--/.well -->
+          </div>
+          {% else %}
+          <div class="span3">
+            <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Dashboard</li>
               <li class="{% if category == 'all' %} active {% endif %}"><a href="/dashboard/all">All Pimlurs</a></li>
               {% for pimlurMOOC in pimlurMOOC|getPimlurCategories %}
-                <li class="{% if category == pimlurMOOC.name %} active {% endif %}"><a href="/dashboard/{{ pimlurMOOC.name }}">{{ pimlurMOOC.name }}</a></li>
+              <li class="{% if category == pimlurMOOC.name %} active {% endif %}"><a href="/dashboard/{{ pimlurMOOC.name }}">{{ pimlurMOOC.name }}</a></li>
               {% endfor %}
               <li class="nav-header">My Pimlurs</li>
               {% for pimlurMOOC in pimlurMOOC|getMyPimlurs:user.id %}
-                <li><a href="#">{{ pimlurMOOC.pimlur.name }}</a></li>
+              <li><a href="#">{{ pimlurMOOC.pimlur.name }}</a></li>
               {% endfor %}
             </ul>
             <ul class="nav nav-list"> 
-                <li class="nav-header">Admin Menu</li>        
-                <li><a href="index"><i class="icon-home"></i> Dashboard</a></li>
+              <li class="nav-header">Admin Menu</li>        
+              <li><a href="index"><i class="icon-home"></i> Dashboard</a></li>
                 <li><a href="#"><i class="icon-envelope"></i> Messages <span class="badge badge-info">4</span></a></li>
                 <li><a href="#"><i class="icon-comment"></i> Comments <span class="badge badge-info">10</span></a></li>
                 <li class=""><a href="#"><i class="icon-user"></i> Members</a></li>
@@ -107,12 +137,14 @@
       
           </div><!--/.well -->
         </div>
+        {% endif %}
         {% endblock %}
         {% block body %}
         {% endblock %}
       </div>
     </div> <!-- /container -->
     <footer>
+      {{ request.path }}
       <p>&copy; Company 2013</p>
     </footer>
     
