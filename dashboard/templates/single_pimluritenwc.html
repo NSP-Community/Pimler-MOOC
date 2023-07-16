@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+<!-- {% load pimlurMOOC_extras %} -->
+
+{% block body %}
+
+<div class="span9">
+  <h2>{{ pimlur.name}}</h2>
+  <div class="row-fluid">
+    <div id="content-singlepimluritem" class="row-fluid">
+        {{ pimlurItem.written_content_html|safe }}
+      </div>
+      <div class="btn-group">
+        <a href="/dashboard/pimlurs/{{pimlur_id}}/{{pimlurcategory_id}}/{{pimluritem_id}}/wc"><button class="btn btn-info">Written content</button></a>
+        <a href="/dashboard/pimlurs/{{pimlur_id}}/{{pimlurcategory_id}}/{{pimluritem_id}}/audio"><button class="btn">Audio</button></a>
+        <a href="/dashboard/pimlurs/{{pimlur_id}}/{{pimlurcategory_id}}/{{pimluritem_id}}/quiz"><button class="btn">Quiz</button></a>
+      </div>
+    </div><!--/row-->
+  </div>
+
+  <script>
+    //   document.getElementById("content-singlepimluritem").innerHTML = '{{ pimlurItem.written_content_html|safe }}'
+  </script>
+{% endblock body %}
