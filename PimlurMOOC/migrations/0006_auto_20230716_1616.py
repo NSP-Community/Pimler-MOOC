@@ -13,21 +13,21 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='pimluritem',
             name='name',
-            field=models.CharField(default='', max_length=700),
+            field=models.CharField(default='', max_length=300),
         ),
         migrations.AlterField(
             model_name='pimlur',
             name='name',
-            field=models.CharField(default='', max_length=700),
+            field=models.CharField(default='', max_length=300),
         ),
         migrations.AlterField(
             model_name='pimlurcategory',
             name='name',
-            field=models.CharField(default='', max_length=700),
+            field=models.CharField(default='', max_length=300),
         ),
         migrations.AlterField(
             model_name='pimlursubcategory',
             name='name',
-            field=models.CharField(default='', max_length=700),
+            field=models.CharField(default='', max_length=300),
         ),
     ]

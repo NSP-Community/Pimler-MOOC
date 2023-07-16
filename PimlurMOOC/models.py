@@ -6,7 +6,7 @@ import datetime
 # Create your models here.
 
 class PimlurCategory(models.Model):
-    name = models.CharField(max_length=700, default="", blank=False)
+    name = models.CharField(max_length=300, default="", blank=False)
     description = models.TextField()
     createdBy = models.ForeignKey(User, on_delete=models.CASCADE)
     createdAt = models.DateField(default=datetime.datetime.now)
@@ -16,7 +16,7 @@ class PimlurCategory(models.Model):
 
 
 class Pimlur(models.Model):
-    name = models.CharField(max_length=700, default="", blank=False)
+    name = models.CharField(max_length=300, default="", blank=False)
     description = models.TextField()
     category = models.ForeignKey(PimlurCategory, on_delete=models.CASCADE)
     pimlurCategory = models.ForeignKey(PimlurCategory,related_name="pimlurCategory",  on_delete=models.CASCADE)
@@ -27,7 +27,7 @@ class Pimlur(models.Model):
         return self.name
 
 class PimlurSubCategory(models.Model):
-    name = models.CharField(max_length=700, default="", blank=False)
+    name = models.CharField(max_length=300, default="", blank=False)
     description = models.TextField()
     createdBy = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(PimlurCategory, on_delete=models.CASCADE)
@@ -48,7 +48,7 @@ class PimlurUser(models.Model):
         return "{} is in {} Pimlur".format(self.user.username, self.pimlur.name)
 
 class PimlurItem(models.Model):
-    name = models.CharField(max_length=700, default="", blank=False)
+    name = models.CharField(max_length=300, default="", blank=False)
     written_content_html = models.TextField()
     video_content_html = models.TextField()
     quiz_content_html  = models.TextField()
