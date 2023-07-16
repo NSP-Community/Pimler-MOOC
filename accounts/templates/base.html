@@ -87,7 +87,8 @@
               <ul class="nav nav-list">
                 <li class="nav-header">Inside Pimlur - {{ pimlur.name }}</li>
                 {% for item in info %}
-                <li class="{% if category == item.0.name %} active {% endif %}"><a href="#/dashboard/pimlurs/{{ pimlur.id }}/{{item.0.id}}">{{ item.0.name }}</a></li>
+                <li class="nav-header">{{ item.0.name }}</li>
+                <!-- <li class="{% if category == item.0.name %} active {% endif %}"><a href="#/dashboard/pimlurs/{{ pimlur.id }}/{{item.0.id}}">{{ item.0.name }}</a></li> -->
                   {% for i in item.1 %}
                   <li class="{% if category == item.0.name %} active {% endif %}"><a href="/dashboard/pimlurs/{{ pimlur.id }}/{{item.0.id}}/{{i.id}}">{{ i.name }}</a></li>
                   {% endfor %}
