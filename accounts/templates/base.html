@@ -95,7 +95,7 @@
                 {% endfor %}
                 <li class="nav-header">My Pimlurs</li>
                 {% for pimlurMOOC in pimlurMOOC|getMyPimlurs:user.id %}
-                <li><a href="#">{{ pimlurMOOC.pimlur.name }}</a></li>
+                <li><a href="/dashboard/pimlurs/{{pimlurMOOC.pimlur.id}}">{{ pimlurMOOC.pimlur.name }}</a></li>
                 {% endfor %}
               </ul>
               <ul class="nav nav-list"> 
