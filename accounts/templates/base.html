@@ -23,6 +23,15 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
     
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
+    <!-- Able Player CSS -->
+    <link rel="stylesheet" href="/static/assets/ableplayer/ableplayer.min.css" type="text/css"/>
+
+    <!-- Able Player JavaScript -->
+    <script src="/static/assets/ableplayer/ableplayer.js"></script>
+
     <script type="text/javascript" src="/assets/quizlib/scripts/quizlib.1.0.1.min.js"></script>
     <!-- Dev: <script type="text/javascript" src="../../src/quizlib.js"></script>-->
     <script type="text/javascript" src="/assets/quizlib/scripts/main.js"></script>
@@ -90,7 +99,7 @@
                 <li class="nav-header">{{ item.0.name }}</li>
                 <!-- <li class="{% if category == item.0.name %} active {% endif %}"><a href="#/dashboard/pimlurs/{{ pimlur.id }}/{{item.0.id}}">{{ item.0.name }}</a></li> -->
                   {% for i in item.1 %}
-                  <li class="{% if category == item.0.name %} active {% endif %}"><a href="/dashboard/pimlurs/{{ pimlur.id }}/{{item.0.id}}/{{i.id}}">{{ i.name }}</a></li>
+                  <li class="{% if category == item.0.name %} active {% endif %}"><a href="/dashboard/pimlurs/{{ pimlur.id }}/{{item.0.id}}/{{i.id}}/wc">{{ i.name }}</a></li>
                   {% endfor %}
                 {% endfor %}
                 <li class="nav-header">My Pimlurs</li>
@@ -122,7 +131,7 @@
               {% endfor %}
               <li class="nav-header">My Pimlurs</li>
               {% for pimlurMOOC in pimlurMOOC|getMyPimlurs:user.id %}
-              <li><a href="#">{{ pimlurMOOC.pimlur.name }}</a></li>
+              <li><a href="/dashboard/pimlurs/{{pimlurMOOC.pimlur.id}}">{{ pimlurMOOC.pimlur.name }}</a></li>
               {% endfor %}
             </ul>
             <ul class="nav nav-list"> 
