@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 import datetime
-
+import sys
+sys.path.append("..") # Adds higher directory to python modules path.
+from quiz.models import Quiz
 
 # Create your models here.
 
@@ -53,6 +55,7 @@ class PimlurItem(models.Model):
     video_content_html = models.TextField()
     quiz_content_html  = models.TextField()
     
+    quiz = models.ForeignKey(Quiz, on_delete=models.SET_NULL, null=True)
     createdBy = models.ForeignKey(User, on_delete=models.CASCADE, )
     pimlur = models.ForeignKey(Pimlur,  on_delete=models.CASCADE)
     pimlurSubCategory = models.ForeignKey(PimlurSubCategory,  on_delete=models.CASCADE)
