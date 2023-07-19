@@ -34,11 +34,14 @@ LOGIN_REDIRECT_URL='/dashboard'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'django.contrib.sites',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_comments_xtd',
+    'django_comments',
     'PimlurMOOC',
     'accounts',
     'project',
@@ -47,6 +50,24 @@ INSTALLED_APPS = [
     'dashboard',
     'quiz'
 ]
+SITE_ID = 1
+
+COMMENTS_APP = 'django_comments_xtd'
+COMMENTS_XTD_MAX_THREAD_LEVEL = 2
+
+COMMENTS_XTD_CONFIRM_EMAIL = False
+
+# Either enable sending mail messages to the console:
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Or set up the EMAIL_* settings so that Django can send emails:
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = "587"
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'gk210076k@riinvest.net'
+EMAIL_HOST_PASSWORD = '1347.riinvest.7431'
+DEFAULT_FROM_EMAIL = "Helpdesk <helpdesk@riinvest>"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
