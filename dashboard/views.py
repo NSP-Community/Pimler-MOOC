@@ -76,8 +76,12 @@ def single_pimluritem(request, pimlur_id, pimlurcategory_id, pimluritem_id, mode
         if question.question_type == "input" or question.question_type == "radio":
             for option in question.options:
                 if (option.correct):
-                    value = '"' + str(option.id) + '"';
-                    break;
+                    if question.question_type == "input":
+                        value = '"' + str(option.value) + '"';
+                        break;
+                    else:
+                        value = '"' + str(option.id) + '"';
+                        break;
         elif question.question_type == "checkbox":
             value += '['
             for option in question.options:
