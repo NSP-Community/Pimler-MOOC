@@ -21,7 +21,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('account/', include('accounts.urls')),
+    path('accounts/', include('accounts.urls')),
     path("dashboard/", include("dashboard.urls")),
     path("project/", include("project.urls")),
     path('comments/', include('django_comments_xtd.urls')),

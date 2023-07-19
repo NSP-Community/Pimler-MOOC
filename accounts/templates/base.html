@@ -57,9 +57,9 @@
           <a class="brand" href="#">Pimlur</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li class="active"><a href="/dashboard">Home</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
             </ul>
             {% if user.is_authenticated %}
             <p class="navbar-text pull-right">
@@ -100,13 +100,13 @@
               </ul>
               <ul class="nav nav-list"> 
                 <li class="nav-header">Admin Menu</li>        
-                <li><a href="index"><i class="icon-home"></i> Dashboard</a></li>
-                  <li><a href="#"><i class="icon-envelope"></i> Messages <span class="badge badge-info">4</span></a></li>
-                  <li><a href="#"><i class="icon-comment"></i> Comments <span class="badge badge-info">10</span></a></li>
+                <li><a href="/dashboard"><i class="icon-home"></i> Dashboard</a></li>
+                  <li><a href="/dashboard/messages"><i class="icon-envelope"></i> Messages <span class="badge badge-info">4</span></a></li>
+                  <li><a href="/dashboard/comments"><i class="icon-comment"></i> Comments <span class="badge badge-info">10</span></a></li>
                   <li class=""><a href="#"><i class="icon-user"></i> Members</a></li>
                   <li class="divider"></li>
                   <li><a href="#"><i class="icon-comment"></i> Settings</a></li>
-                  <li><a href="#"><i class="icon-share"></i> Logout</a></li>
+                  <li><a href="/account/logout"><i class="icon-share"></i> Logout</a></li>
                 </ul>
         
             </div><!--/.well -->
@@ -127,13 +127,13 @@
             </ul>
             <ul class="nav nav-list"> 
               <li class="nav-header">Admin Menu</li>        
-              <li><a href="index"><i class="icon-home"></i> Dashboard</a></li>
-                <li><a href="#"><i class="icon-envelope"></i> Messages <span class="badge badge-info">4</span></a></li>
-                <li><a href="#"><i class="icon-comment"></i> Comments <span class="badge badge-info">10</span></a></li>
+              <li><a href="/dashboard"><i class="icon-home"></i> Dashboard</a></li>
+                <li><a href="/dashboard/messages"><i class="icon-envelope"></i> Messages <span class="badge badge-info">4</span></a></li>
+                <li><a href="/dashboard/comments"><i class="icon-comment"></i> Comments <span class="badge badge-info">10</span></a></li>
                 <li class=""><a href="#"><i class="icon-user"></i> Members</a></li>
                 <li class="divider"></li>
                 <li><a href="#"><i class="icon-comment"></i> Settings</a></li>
-                <li><a href="#"><i class="icon-share"></i> Logout</a></li>
+                <li><a href="/account/logout"><i class="icon-share"></i> Logout</a></li>
               </ul>
       
           </div><!--/.well -->
@@ -145,7 +145,7 @@
       </div>
     </div> <!-- /container -->
     <footer>
-      <p>&copy; Company 2013</p>
+      <p>&copy; Pimlur 2013</p>
     </footer>
     
     <script>
@@ -193,6 +193,12 @@
     <script src="/assets/js/bootstrap-collapse.js"></script>
     <script src="/assets/js/bootstrap-carousel.js"></script>
     <script src="/assets/js/bootstrap-typeahead.js"></script>
-
+      <script>
+        window.onload = () => {
+          if ( document.querySelector("#id_name") ) {
+            document.querySelector("#id_name").value = '{{ current_user.username }}'
+          }
+        }
+      </script>
   </body>
 </html>

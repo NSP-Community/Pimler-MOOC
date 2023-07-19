@@ -20,10 +20,9 @@ def dashboard_category(request, category):
     
     return render(request, "dashboard.html", { 'user': request.user, 'category': category })
 
-@login_required
 def join_pimlur(request):
     pimlurId = request.POST['pimlurId'];
-    print(pimlurId)
+    print('HERE', pimlurId, request.user.id)
     PimlurUser.objects.create(user_id=request.user.id, pimlur_id=pimlurId)
     return redirect("/dashboard/pimlurs/" + pimlurId)
 
@@ -96,5 +95,6 @@ def single_pimluritem(request, pimlur_id, pimlurcategory_id, pimluritem_id, mode
         'pimlur': pimlur, 'info': info.items(),
         'pimlurItem': pimlurItem,
         'pimlur_id': pimlur_id, 'pimlurcategory_id': pimlurcategory_id, 
-        'pimluritem_id': pimluritem_id, 'mode': mode
+        'pimluritem_id': pimluritem_id, 'mode': mode,
+        'current_user': request.user
      })
