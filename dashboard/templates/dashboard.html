@@ -11,7 +11,7 @@
       <h2>{{pimlurMOOC.name}}</h2>
       <p>{{ pimlurMOOC.description }}</p>
       <p>
-        <form method="post" action="{% url 'join_pimlur' %}">{% csrf_token %}
+        <form method="POST" action="{% url 'join_pimlur' %}">{% csrf_token %}
           <input type="hidden" name="pimlurId" value="{{pimlurMOOC.id}}"/>
           <button type="submit" class="btn" href="#">Join Pimlur »</button></p>
         </form>

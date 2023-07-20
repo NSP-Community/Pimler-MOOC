@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 <!-- {% load pimlurMOOC_extras %} -->
+{% load i18n %}
+{% load comments %}
+{% load comments_xtd %}
 
 {% block body %}
 
@@ -36,8 +39,51 @@
         <a href="/dashboard/pimlurs/{{pimlur_id}}/{{pimlurcategory_id}}/{{pimluritem_id}}/audio"><button class="btn">Audio</button></a>
         <a href="/dashboard/pimlurs/{{pimlur_id}}/{{pimlurcategory_id}}/{{pimluritem_id}}/quiz"><button class="btn btn-info">Quiz</button></a>
       </div>
+      <div class="row justify-content-center flex-fill">
+        <div class="">
+          <div id="comments">
+            {% get_comment_count for pimlurItem as comment_count %}
+            {% if comment_count %}
+            <H5 class="text-center">
+              {% blocktrans count comment_count=comment_count %}
+              There is {{ comment_count }} comment below.
+              {% plural %}
+              There are {{ comment_count }} comments below.
+              {% endblocktrans %}
+            </H5>
+            {% endif %}
+    
+            {% if pimlurItem.allow_comments %}
+            <div class="offset1 card card-block mt-4 mb-5">
+              <div class="card-body">
+                <h4 class="">Post your comment</h4>
+                {% render_comment_form for pimlurItem %}
+              </div>
+            </div>
+            {% else %}
+            <h4 class="mt-4 mb-5 text-center text-secondary">Comments are disabled for this quote.</h4>
+            {% endif %}
+    
+            {% if comment_count %}
+            <div class="offset1">
+              {% render_xtdcomment_tree for pimlurItem allow_flagging allow_feedback show_feedback  %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
     </div><!--/row-->
   </div>
+  <style>
+    #comments > div.card.card-block.mt-4.mb-5 {
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+    #comments > div.offset1.card.card-block.mt-4.mb-5 > div > form > div > div > input.btn.btn-secondary {
+      display: none;
+    }
+  </style>
 
   <script>
 /**

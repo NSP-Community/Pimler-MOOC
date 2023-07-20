@@ -4,6 +4,7 @@ import datetime
 import sys
 sys.path.append("..") # Adds higher directory to python modules path.
 from quiz.models import Quiz
+from django.urls import reverse
 
 # Create your models here.
 
@@ -60,5 +61,19 @@ class PimlurItem(models.Model):
     pimlur = models.ForeignKey(Pimlur,  on_delete=models.CASCADE)
     pimlurSubCategory = models.ForeignKey(PimlurSubCategory,  on_delete=models.CASCADE)
 
+    allow_comments = models.BooleanField('allow comments', default=True)
+
     def __str__(self):
         return self.pimlur.name + ' ' + self.pimlurSubCategory.name + ' ' + self.name
+
+    class Meta:
+        ordering = ('-id',)
+
+    def get_absolute_url(self):
+        return reverse(
+            'single_pimluritem',
+            kwargs={'pimlur_id': self.pimlur.id,
+                    'pimlurcategory_id': int(self.pimlurSubCategory.id),
+                    'pimluritem_id': self.id,
+                    'mode': 'wc'
+            })
