@@ -23,7 +23,8 @@ def dashboard_category(request, category):
 def join_pimlur(request):
     pimlurId = request.POST['pimlurId'];
     print('HERE', pimlurId, request.user.id)
-    PimlurUser.objects.create(user_id=request.user.id, pimlur_id=pimlurId)
+    if not PimlurUser.objects.filter(user_id=request.user.id, pimlur_id=pimlurId):
+        PimlurUser.objects.create(user_id=request.user.id, pimlur_id=pimlurId)
     return redirect("/dashboard/pimlurs/" + pimlurId)
 
 

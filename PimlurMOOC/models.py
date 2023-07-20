@@ -5,6 +5,7 @@ import sys
 sys.path.append("..") # Adds higher directory to python modules path.
 from quiz.models import Quiz
 from django.urls import reverse
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -52,9 +53,9 @@ class PimlurUser(models.Model):
 
 class PimlurItem(models.Model):
     name = models.CharField(max_length=300, default="", blank=False)
-    written_content_html = models.TextField()
-    video_content_html = models.TextField()
-    quiz_content_html  = models.TextField()
+    written_content_html = RichTextField()
+    video_content_html = RichTextField()
+    quiz_content_html  = RichTextField()
     
     quiz = models.ForeignKey(Quiz, on_delete=models.SET_NULL, null=True)
     createdBy = models.ForeignKey(User, on_delete=models.CASCADE, )

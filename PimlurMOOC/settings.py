@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_comments_xtd',
     'django_comments',
     'django_messages',
+    'ckeditor', 
     'PimlurMOOC',
     'accounts',
     'project',
