@@ -90,7 +90,7 @@ def edit_profile_view(request):
 
         if form.is_valid():
             form.save()
-            return redirect('/account/profile')
+            return redirect('/accounts/profile')
 
     else:
         form = EditProfileForm(instance=request.user)
@@ -107,9 +107,9 @@ def change_password_view(request):
             # so that user does not get logged out, not working as of now.
             # TODO
             update_session_auth_hash(request, form.user)
-            return redirect('/account/profile')
+            return redirect('/accounts/profile')
         else:
-            return redirect('/account/change-password')
+            return redirect('/accounts/change-password')
 
     else:
         form = PasswordChangeForm(user=request.user)
@@ -126,7 +126,7 @@ def change_profile_picture(request):
         form = ImageFileUploadForm(request.POST, request.FILES, instance=current_user_profile)
         if form.is_valid():
             form.save()
-            return redirect("/account/change_profile_pic")
+            return redirect("/accounts/change_profile_pic")
         else:
             context = {"current_user_profile": current_user_profile, "form": form}
             return render(request, "accounts/profile_pic_upload.html", context)
@@ -189,7 +189,7 @@ def delete_skill(request, ID):
     skill = get_object_or_404(Skill,pk=ID)
     if skill.user == request.user:
         skill.delete()
-    return redirect("/account/profile/")
+    return redirect("/accounts/profile/")
 
 
 # SKILL FORM VIEW LATEST CREATION
@@ -222,7 +222,7 @@ def follow_user(request, ID):
         follow_value = True
     args = {'user': friend, 'viewer': request.user, 'follow_value': follow_value}
     # redirecting to the same page
-    return redirect("/account/users/" + friend.username)
+    return redirect("/accounts/users/" + friend.username)
 
 
 @login_required
@@ -236,7 +236,7 @@ def unfollow_user(request, ID):
     Follow.objects.filter(**follow_args).delete()
     follow_value = False
     args = {'user': friend, 'viewer': request.user, 'follow_value': follow_value}
-    return redirect("/account/users/" + friend.username)
+    return redirect("/accounts/users/" + friend.username)
 
 
 class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and not FormView

@@ -57,14 +57,14 @@ def project_edit(request, ID):
             project.branch = request.POST.get("branch")
             project.description = request.POST.get("description")
             project.save()
-            return redirect("/account/project/{}".format(str(project.id)))
+            return redirect("/accounts/project/{}".format(str(project.id)))
         args = {"project": project}
         if project.initiated_by == request.user:
             return render(request, 'project/editProject.html', args)
         else:
             raise Http404
     else:
-        return redirect("/account/project/{}".format(str(project.id)))
+        return redirect("/accounts/project/{}".format(str(project.id)))
 
 
 @login_required

@@ -322,7 +322,7 @@ __d("XUFICommentAppealSpamController",["XController"],(function(a,b,c,d,e,f){e.e
 __d("XUFICommentBulkReviewController",["XController"],(function(a,b,c,d,e,f){e.exports=b("XController").create("/ufi/comments/bulk_review/",{feedback_target_id:{type:"FBID",required:!0},entry_point:{type:"Enum",required:!0,enumType:1},__asyncDialog:{type:"Int"}})}),null);
 __d("XUFICommentKeepSpamController",["XController"],(function(a,b,c,d,e,f){e.exports=b("XController").create("/ufi/comment/keep_spam/",{})}),null);
 __d("XUFICommentLikeController",["XController"],(function(a,b,c,d,e,f){e.exports=b("XController").create("/ufi/comment/like/",{})}),null);
-__d("XUFICommentSecureAccountController",["XController"],(function(a,b,c,d,e,f){e.exports=b("XController").create("/ufi/comment/secure_account/",{})}),null);
+__d("XUFICommentSecureAccountController",["XController"],(function(a,b,c,d,e,f){e.exports=b("XController").create("/ufi/comment/secure_accounts/",{})}),null);
 __d("XUFIDeleteCommentAndRemoveCommenterController",["XController"],(function(a,b,c,d,e,f){e.exports=b("XController").create("/ufi/deletecommentandremovecommenter/",{})}),null);
 __d("XUFIDeleteCommentController",["XController"],(function(a,b,c,d,e,f){e.exports=b("XController").create("/ufi/delete/comment/",{})}),null);
 __d("XUFIEditCommentController",["XController"],(function(a,b,c,d,e,f){e.exports=b("XController").create("/ufi/edit/comment/",{})}),null);

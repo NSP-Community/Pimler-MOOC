@@ -60,7 +60,7 @@ function send() {
 			$.ajax({
 				method: "POST",
 				data: {"csrfmiddlewaretoken":csrftoken,"sender_message":sender_message},
-				url: `/account/chat/send_message_api/${receiver}`,
+				url: `/accounts/chat/send_message_api/${receiver}`,
 			});
 		} catch (err) {
 			alert(err);
@@ -82,7 +82,7 @@ function update() {
 	$.ajax({
 		method: "POST",
 		data: {"csrfmiddlewaretoken":csrftoken},
-		url: `/account/chat/get_messages_api/${receiver}`,
+		url: `/accounts/chat/get_messages_api/${receiver}`,
 	}).done(function (json){
 		console.log(json);
 		if (messages_len < json.length){
