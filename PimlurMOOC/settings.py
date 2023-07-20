@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'project',
     'nspmessage',
     'notifications',
-    'dashboard'
+    'dashboard',
+    'quiz'
 ]
 
 MIDDLEWARE = [

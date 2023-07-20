@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 import sys
 sys.path.append("..") # Adds higher directory to python modules path.
 from PimlurMOOC.models import PimlurUser, Pimlur, PimlurSubCategory, PimlurItem
+from quiz.models import Quiz, Question, Option
 # Create your views here.
 
 @login_required
@@ -62,7 +63,32 @@ def single_pimluritem(request, pimlur_id, pimlurcategory_id, pimluritem_id, mode
         _items = PimlurItem.objects.filter(pimlurSubCategory=subCategory)
         info[subCategory] = _items;
 
+    quizQuestions = Question.objects.filter(quiz=pimlurItem.quiz.id);
+    for question in quizQuestions:
+        question.options = list(Option.objects.filter(question_id=question.id))
+
+    quizQuestions = list(quizQuestions)
+    
+    answers_html = ""
+
+    for question in quizQuestions:
+        value = "";
+        if question.question_type == "input" or question.question_type == "radio":
+            for option in question.options:
+                if (option.correct):
+                    value = '"' + str(option.id) + '"';
+                    break;
+        elif question.question_type == "checkbox":
+            value += '['
+            for option in question.options:
+                if (option.correct):
+                    value += '"' + str(option.id) + '",';
+            value += '],'
+            
+        if not question.id == quizQuestions[len(quizQuestions) - 1].id: answers_html += value + ",";
+        if question.id == quizQuestions[len(quizQuestions) - 1].id: answers_html += value
     return render(request, "single_pimluriten" + mode + ".html", {
+        'quizQuestions': quizQuestions, 'answers_html': answers_html,
         'pimlur': pimlur, 'info': info.items(),
         'pimlurItem': pimlurItem,
         'pimlur_id': pimlur_id, 'pimlurcategory_id': pimlurcategory_id, 
