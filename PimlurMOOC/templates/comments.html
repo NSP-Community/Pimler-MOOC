@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load pimlurMOOC_extras %}
+{% load comments_xtd %}
+
+{% block body %}
+
+<div class="span9">
+  <h2>Comments</h2>
+  {% for pimlurItem in pimlurMOOC|getPimlurItems:request.user.id %}
+    <h3>{{ pimlurItem }}</h3>
+    {% render_xtdcomment_tree for pimlurItem allow_flagging allow_feedback show_feedback  %}
+
+  {% endfor %}
+
+</div>
+
+{% endblock body %}

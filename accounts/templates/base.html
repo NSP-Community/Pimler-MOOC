@@ -1,6 +1,9 @@
 
 
 {% load pimlurMOOC_extras %}
+{% load inbox %}
+{% load comments %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,7 +33,9 @@
     <!-- Dev: <link rel="stylesheet" type="text/css" href="../../src/quizlib.css" media="screen">-->
     <link rel="stylesheet" type="text/css" href="/static/assets/quizlib/styles/stylesheet.css" media="screen">
 
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="/assets/js/html5shiv.js"></script>
@@ -101,8 +106,8 @@
               <ul class="nav nav-list"> 
                 <li class="nav-header">Admin Menu</li>        
                 <li><a href="/dashboard"><i class="icon-home"></i> Dashboard</a></li>
-                  <li><a href="/dashboard/messages"><i class="icon-envelope"></i> Messages <span class="badge badge-info">4</span></a></li>
-                  <li><a href="/dashboard/comments"><i class="icon-comment"></i> Comments <span class="badge badge-info">10</span></a></li>
+                  <li><a href="/messages"><i class="icon-envelope"></i> Messages <span class="badge badge-info">4</span></a></li>
+                  <li><a href="/comments"><i class="icon-comment"></i> Comments <span class="badge badge-info">{{ pimlurMOOC|getCommentCount }}</span></a></li>
                   <li class=""><a href="#"><i class="icon-user"></i> Members</a></li>
                   <li class="divider"></li>
                   <li><a href="#"><i class="icon-comment"></i> Settings</a></li>
@@ -122,14 +127,16 @@
               {% endfor %}
               <li class="nav-header">My Pimlurs</li>
               {% for pimlurMOOC in pimlurMOOC|getMyPimlurs:user.id %}
-              <li><a href="#">{{ pimlurMOOC.pimlur.name }}</a></li>
+              <li><a href="/dashboard/pimlurs/{{ pimlurMOOC.pimlur.id }}">{{ pimlurMOOC.pimlur.name }}</a></li>
               {% endfor %}
             </ul>
             <ul class="nav nav-list"> 
               <li class="nav-header">Admin Menu</li>        
               <li><a href="/dashboard"><i class="icon-home"></i> Dashboard</a></li>
-                <li><a href="/dashboard/messages"><i class="icon-envelope"></i> Messages <span class="badge badge-info">4</span></a></li>
-                <li><a href="/dashboard/comments"><i class="icon-comment"></i> Comments <span class="badge badge-info">10</span></a></li>
+                <li><a href="/messages"><i class="icon-envelope"></i> Messages <span class="badge badge-info">{% inbox_count %}</span></a></li>
+                {% block sidebar %}
+                {% endblock %}
+                <li><a href="/comments"><i class="icon-comment"></i> Comments <span class="badge badge-info">{{ pimlurMOOC|getCommentCount }}</span></a></li>
                 <li class=""><a href="#"><i class="icon-user"></i> Members</a></li>
                 <li class="divider"></li>
                 <li><a href="#"><i class="icon-comment"></i> Settings</a></li>
@@ -139,9 +146,11 @@
           </div><!--/.well -->
         </div>
         {% endif %}
-        {% endblock %}
-        {% block body %}
-        {% endblock %}
+          {% endblock %}
+          {% block body %}
+          {% endblock %}
+          {% block content %}
+          {% endblock %}
       </div>
     </div> <!-- /container -->
     <footer>
@@ -177,6 +186,11 @@
         }
 
     </script>
+    <style>
+      body > div.container-fluid > div > div.container > div.row.justify-content-center.my-4 {
+        height: 50px;
+      }
+    </style>
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

@@ -3,7 +3,7 @@ from collections import OrderedDict
 from django import template
 
 from accounts.models import UserProfile
-from ..models import PimlurCategory, PimlurUser, Pimlur, PimlurSubCategory
+from ..models import PimlurCategory, PimlurUser, Pimlur, PimlurSubCategory, PimlurItem
 
 register = template.Library()
 
@@ -23,6 +23,17 @@ def getPimlurs(context,category):
     if (category == "all" or category == "All"): return Pimlur.objects.all().order_by("-id");
     else: return Pimlur.objects.filter(category__name=category).order_by("-id")
 
+@register.filter(name='getCommentCount')
+def getCommentCount(context):
+    return 1
+
+@register.filter(name="getPimlurItems")
+def getCommentCount(context,user_id):
+    pimlurUsers = PimlurUser.objects.filter(user_id=user_id)
+    ids = [];
+    for p in pimlurUsers: ids.append(p.pimlur.id)
+    pimlurItems = PimlurItem.objects.filter(pimlur_id__in=ids)
+    return pimlurItems
 # @register.filter(name='getPimlurSubCategories')
 # def getPimlurSubCategories(context,id):
 #     pimlurSubCategories = PimlurSubCategory.objects.filter(pimlur_id=id)

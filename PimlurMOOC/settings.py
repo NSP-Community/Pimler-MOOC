@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_comments_xtd',
     'django_comments',
+    'django_messages',
     'PimlurMOOC',
     'accounts',
     'project',
@@ -96,6 +97,18 @@ TEMPLATES = [
         },
     },
 ]
+
+COMMENTS_XTD_APP_MODEL_OPTIONS = {
+    'default': {
+        'allow_flagging': True,
+        'allow_feedback': True,
+        'show_feedback': True,
+        'who_can_post': 'all'
+    }
+}
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django_messages.context_processors.inbox',
+)
 
 WSGI_APPLICATION = 'PimlurMOOC.wsgi.application'
 
