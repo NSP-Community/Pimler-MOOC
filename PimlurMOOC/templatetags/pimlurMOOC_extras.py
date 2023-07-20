@@ -4,7 +4,7 @@ from django import template
 
 from accounts.models import UserProfile
 from ..models import PimlurCategory, PimlurUser, Pimlur, PimlurSubCategory, PimlurItem
-
+from django_comments_xtd.models import XtdComment as Comment
 register = template.Library()
 
 
@@ -24,8 +24,12 @@ def getPimlurs(context,category):
     else: return Pimlur.objects.filter(category__name=category).order_by("-id")
 
 @register.filter(name='getCommentCount')
-def getCommentCount(context):
-    return 1
+def getCommentCount(context, user_id):
+    return len(Comment.objects.filter(user_id=user_id))
+
+@register.filter(name='getComments')
+def getComments(context, user_id):
+    return Comment.objects.filter(user_id=user_id)
 
 @register.filter(name="getPimlurItems")
 def getCommentCount(context,user_id):

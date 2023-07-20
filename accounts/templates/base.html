@@ -107,7 +107,7 @@
                 <li class="nav-header">Admin Menu</li>        
                 <li><a href="/dashboard"><i class="icon-home"></i> Dashboard</a></li>
                   <li><a href="/messages"><i class="icon-envelope"></i> Messages <span class="badge badge-info">4</span></a></li>
-                  <li><a href="/comments"><i class="icon-comment"></i> Comments <span class="badge badge-info">{{ pimlurMOOC|getCommentCount }}</span></a></li>
+                  <li><a href="/comments"><i class="icon-comment"></i> Comments <span class="badge badge-info">{{ pimlurMOOC|getCommentCount:user.id }}</span></a></li>
                   <li class=""><a href="#"><i class="icon-user"></i> Members</a></li>
                   <li class="divider"></li>
                   <li><a href="#"><i class="icon-comment"></i> Settings</a></li>
@@ -136,7 +136,7 @@
                 <li><a href="/messages"><i class="icon-envelope"></i> Messages <span class="badge badge-info">{% inbox_count %}</span></a></li>
                 {% block sidebar %}
                 {% endblock %}
-                <li><a href="/comments"><i class="icon-comment"></i> Comments <span class="badge badge-info">{{ pimlurMOOC|getCommentCount }}</span></a></li>
+                <li><a href="/comments"><i class="icon-comment"></i> Comments <span class="badge badge-info">{{ pimlurMOOC|getCommentCount:user.id }}</span></a></li>
                 <li class=""><a href="#"><i class="icon-user"></i> Members</a></li>
                 <li class="divider"></li>
                 <li><a href="#"><i class="icon-comment"></i> Settings</a></li>
@@ -189,6 +189,10 @@
     <style>
       body > div.container-fluid > div > div.container > div.row.justify-content-center.my-4 {
         height: 50px;
+      }
+      body > div.container-fluid > div > div.span3 {
+        height: 100vh !important;
+        margin-right: 15px;
       }
     </style>
     <!-- Le javascript
