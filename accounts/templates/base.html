@@ -62,9 +62,9 @@
           <a class="brand" href="#">Pimlur</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="/dashboard">Home</a></li>
-              <li><a href="/about">About</a></li>
-              <li><a href="/contact">Contact</a></li>
+              <li class="{% if request.path == '/dashboard/' %} active {% endif %}"><a href="/dashboard">Home</a></li>
+              <li class="{% if request.path == '/about' %} active {% endif %}"><a href="/about">About</a></li>
+              <li class="{% if request.path == '/contact' %} active {% endif %}"><a href="/contact">Contact</a></li>
             </ul>
             {% if user.is_authenticated %}
             <p class="navbar-text pull-right">
@@ -142,15 +142,16 @@
                 <li><a href="#"><i class="icon-comment"></i> Settings</a></li>
                 <li><a href="/accounts/logout"><i class="icon-share"></i> Logout</a></li>
               </ul>
-      
           </div><!--/.well -->
         </div>
         {% endif %}
+        <div class="span7">
           {% endblock %}
-          {% block body %}
-          {% endblock %}
-          {% block content %}
-          {% endblock %}
+            {% block body %}
+            {% endblock %}
+            {% block content %}
+            {% endblock %}
+        </div>  
       </div>
     </div> <!-- /container -->
     <footer>

@@ -7,3 +7,14 @@ def comments(request):
     
     return render(request, "comments.html", { 'user': request.user })
 
+def contact(request):
+    # conversations = get_conversations(request)
+    
+    return render(request, "contact.html", { 'user': request.user })
+
+
+def about(request):
+    # conversations = get_conversations(request)
+    
+    return render(request, "about.html", { 'user': request.user })
+

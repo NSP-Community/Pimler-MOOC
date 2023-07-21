@@ -28,26 +28,12 @@ urlpatterns = [
     path("dashboard/", include("dashboard.urls")),
     path("project/", include("project.urls")),
     path('comments', views.comments, name="comments"),
+    path('about', views.about, name="about"),
+    path('contact', views.contact, name="contact"),
     path('messages/', include('django_messages.urls')),
-    re_path(r'^sent/$', django_comments_xtd_views.sent, name='comments-xtd-sent'),
-    re_path(r'^confirm/(?P<key>[^/]+)/$', django_comments_xtd_views.confirm,
-            name='comments-xtd-confirm'),
-    re_path(r'^mute/(?P<key>[^/]+)/$', django_comments_xtd_views.mute, name='comments-xtd-mute'),
-    re_path(r'^reply/(?P<cid>\d+)/$', django_comments_xtd_views.reply, name='comments-xtd-reply'),
-
-    # Remap comments-flag to check allow-flagg<ing is enabled.
-    re_path(r'^flag/(\d+)/$', django_comments_xtd_views.flag, name='comments-flag'),
-    # New flags in addition to those provided by django-contrib-comments.
-    re_path(r'^like/(\d+)/$', django_comments_xtd_views.like, name='comments-xtd-like'),
-    re_path(r'^liked/$', django_comments_xtd_views.like_done, name='comments-xtd-like-done'),
-    re_path(r'^dislike/(\d+)/$', django_comments_xtd_views.dislike, name='comments-xtd-dislike'),
-    re_path(r'^disliked/$', django_comments_xtd_views.dislike_done,
-            name='comments-xtd-dislike-done'),
-
+    path('comments/', include("django_comments_xtd.urls")),
     # API handlers.
     path('api/', include("django_comments_xtd.api.urls"),
          {'override_drf_defaults': True}),
-
     path('', include("django_comments.urls")),
-
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
