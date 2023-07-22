@@ -1,6 +1,6 @@
 # Pimler-MOOC
 Pimler is an open-source language learning MOOC
-Updating from previous default branch:
+
 ![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/0018da23-05fe-461a-9b71-227b5340ab80)
 ![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/bed19780-b8fe-404d-98e9-2b455fbfb7af)
 ![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/a54fba43-e95b-48dd-8d16-e05ae9ca6cba)
@@ -16,10 +16,11 @@ Updating from previous default branch:
 ![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/c7de5c7c-1af1-468b-a70b-78cd215c3cb7)
 ![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/3a54e672-4864-488a-93be-a18c120d2605)
 
+Updating from previous default branch:
+
 [code]
 git branch -m template main
 git fetch origin
 git branch -u origin/main main
 git remote set-head origin -a
 [/code]
-
