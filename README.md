@@ -16,3 +16,10 @@ Pimler is an open-source language learning MOOC
 ![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/41848350-018c-4874-bd1f-008948be8441)
 ![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/83848fa1-d71e-4538-82be-cb2c4c5a4545)
 ![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/32243542-dd1f-4928-96ff-0c79bcc37b61)
+
+Updating from previous default branch:
+
+git branch -m template main
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
