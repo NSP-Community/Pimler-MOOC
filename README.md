@@ -1,4 +1,4 @@
-# Pimler-MOOC
+# Pimlur-MOOC
 Pimler is an open-source language learning MOOC
 
 ![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/0018da23-05fe-461a-9b71-227b5340ab80)
