@@ -1,18 +1,26 @@
-# Pimler-MOOC
-Pimler is an open-source language learning MOOC
-![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/481d3de0-a61c-48f1-9c0c-ee18add402ca)
-![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/483a2ae9-6c8a-4f06-9d15-02f2cc54a579)
-![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/46456400-213c-42d2-87bd-0604b10cd090)
-![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/7b76b217-eda2-4e09-8cc6-76e487038964)
-![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/7b417dd8-d6b9-47c3-a998-1141b5340ad1)
-![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/058be17c-4817-432f-b36b-22ef7f68e285)
-![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/b952b993-2477-4430-bf6f-244cf482d06e)
-![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/44f4d189-899b-46ce-8bed-0a50503b1aa7)
-![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/98d059ac-69e4-4d05-a3b3-89b7d6191817)
-![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/07f5ada9-5671-4974-b72b-f67e899eb86e)
-![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/b6742f60-8ce0-40f7-8471-fe31719b611c)
-![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/44580fbc-0bea-4135-bb71-431295e30ac7)
-![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/84ab4d90-d214-4a8a-8dcc-dfd32925cdf6)
-![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/41848350-018c-4874-bd1f-008948be8441)
-![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/83848fa1-d71e-4538-82be-cb2c4c5a4545)
-![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/32243542-dd1f-4928-96ff-0c79bcc37b61)
+# Pimlur-MOOC
+Pimlur is an open-source language learning MOOC
+
+![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/0018da23-05fe-461a-9b71-227b5340ab80)
+![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/bed19780-b8fe-404d-98e9-2b455fbfb7af)
+![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/a54fba43-e95b-48dd-8d16-e05ae9ca6cba)
+![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/937abd2f-5e86-4d7e-8647-dfbc14d5a1cd)
+![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/889c785d-db51-459e-bbf4-592c6de6aa99)
+![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/7ce6c696-b039-43f3-9053-bb952edb22f8)
+![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/c504d8df-cecd-4772-a55b-08fef27a00fd)
+![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/74cd4e46-b00c-4e09-afb4-786bfbf2b6a1)
+![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/f7cd501e-ed8d-4dc3-b2cc-fe91d3e718ec)
+![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/c6ae372d-e5b2-4e36-ae39-85cb1fd78131)
+![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/720fa7e0-256e-444c-8f81-f946894ab807)
+![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/aa9374b8-c6ef-49da-b987-97faba6ec812)
+![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/c7de5c7c-1af1-468b-a70b-78cd215c3cb7)
+![image](https://github.com/NSP-Community/Pimler-MOOC/assets/24304449/3a54e672-4864-488a-93be-a18c120d2605)
+
+Updating from previous default branch:
+
+[code]
+git branch -m template main
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
+[/code]
